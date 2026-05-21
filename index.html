@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/icon-192.png">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons&family=Material+Icons+Outlined&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Horario</h1>
+        <p class="subtitle">Controle dos funcionários</p>
+    </header>
+
+    <main>
+        <section id="inicio" class="screen active">
+            <div class="welcome-card">
+                <div>
+                    <h2><span class="material-icons-outlined welcome-icon">schedule</span> Bem-vindo ao Horario</h2>
+                    
+                </div>
+                <button id="inicio-add" class="primary-button"><span class="material-icons-outlined">add_circle</span>Add</button>
+            </div>
+            
+            </div>
+        </section>
+        <section id="registros" class="screen">
+            <div class="registros-top">
+                <div>
+                    <h2>Registros</h2>
+                    <p id="today-label"></p>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar funcionário...">
+                <div id="filters">
+                    <button class="filter-btn active" data-filter="hoje">Hoje</button>
+                    <button class="filter-btn" data-filter="intervalo">Intervalo</button>
+                </div>
+                <div id="date-range" style="display: none;">
+                    <input type="date" id="start-date">
+                    <input type="date" id="end-date">
+                    <button id="download-pdf" class="primary-button"><span class="material-icons-outlined">download</span>Baixar PDF</button>
+                </div>
+            </div>
+            <div id="registros-list"></div>
+        </section>
+
+    </main>
+
+    <nav id="bottom-nav">
+        <button class="nav-btn active" data-screen="inicio"><span class="material-icons-outlined nav-icon">home</span><span class="nav-label">Home</span></button>
+        <button class="nav-btn" data-screen="registros"><span class="material-icons-outlined nav-icon">format_list_bulleted</span><span class="nav-label">Horarios</span></button>
+    </nav>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modal-title">Adicionar Registro</h3>
+            <form id="registro-form">
+                <label for="data">Data:</label>
+                <input type="date" id="data" required>
+                <label for="nome">Nome do Funcionário:</label>
+                <input type="text" id="nome" list="nome-list" autocomplete="off" required>
+                <datalist id="nome-list"></datalist>
+                <label for="hora">Hora de Início:</label>
+                <input type="time" id="hora" required>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
